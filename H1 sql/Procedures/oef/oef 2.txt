@@ -1,0 +1,26 @@
+CREATE OR REPLACE PROCEDURE grootste_dept
+AS
+	v_dept_id	employees.department_id%TYPE;
+	v_dept_naam	departments.department_name%TYPE;
+	v_naam		employees.last_name%TYPE;
+	v_vnaam		employees.first_name%TYPE;
+	v_salaris	employees.salary%TYPE;
+BEGIN
+SELECT department_name, department_id
+INTO v_dept_naam, v_dept_id
+FROM departments join employees
+USING(department_id)
+GROUP BY department_name, department_id
+HAVING COUNT(employee_id)=(SELECT MAX(COUNT(*))
+FROM employees
+GROUP BY department_id);
+SELECT last_name, first_name, salary
+INTO v_naam, v_vnaam, v_salaris
+FROM employees JOIN departments using (department_id)
+WHERE department_name=v_dept_naam
+AND employees.salary = (SELECT max(salary)
+FROM employees
+WHERE department_id=v_dept_id);
+DBMS_OUTPUT.PUT_LINE('Departement:'||v_dept_naam||'hoogste salaris'||v_naam||''||v_vnaam||' '||v_salaris);
+END;
+/

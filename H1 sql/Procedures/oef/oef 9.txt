@@ -1,0 +1,36 @@
+CREATE OR REPLACE PROCEDURE opgave_9
+      (  p_dep_id      IN    DEPARTMENTS.DEPARTMENT_ID%type
+        , p_percentage      NUMBER
+      )
+     AS
+        p_depname       DEPARTMENTS.DEPARTMENT_NAME%type;
+        p_aantalemp     NUMBER;
+        e_empid         EMPLOYEES.EMPLOYEE_ID%type;
+        e_firstname     EMPLOYEES.FIRST_NAME%type;
+        e_lastname      EMPLOYEES.LAST_NAME%type;  
+        e_salary        EMPLOYEES.SALARY%type;
+    BEGIN  
+            -- '(1) eerst de naam van het departement ophalen ahv de id en vervolgens weergeven';
+            select DEPARTMENTS.DEPARTMENT_NAME into p_depname from DEPARTMENTS where DEPARTMENTS.DEPARTMENT_ID = p_dep_id;
+            DBMS_OUTPUT.PUT_LINE('Het gekozen departement is: ' || p_depname);
+            -- '(2) nu de lijst tonen van die employees die dat id als deptid hebben';
+            /* dit even in een cursor met de naam rs zetten,
+            dit aangezien er meerdere resultaten kunnen zijn; kan dus niet met een 'into' gebeuren */
+            FOR rs IN (SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY from EMPLOYEES where EMPLOYEES.DEPARTMENT_ID = p_dep_id)
+      LOOP
+      -- (3) doorheen de cursor (rs) loopen en tonen
+        DBMS_OUTPUT.PUT_LINE (rs.EMPLOYEE_ID || ' ' || rs.FIRST_NAME || ' ' || rs.LAST_NAME || ' ' || rs.SALARY);
+      END LOOP;
+      -- (4) aanpassing van het salaris doen en bijhouden om hoeveel mensen het gaat en vervolgens tonen
+      update employees set salary = salary * (1 + p_percentage/100) where department_id = p_dep_id;
+            p_aantalemp := SQL%rowcount;
+            DBMS_OUTPUT.PUT_LINE('Aantal salarisverhogingen : ' || p_aantalemp);
+      -- (5) updates zijn gebeurd; nu opnieuw zelfde als in (2) en (3)
+        DBMS_OUTPUT.PUT_LINE (chr(13) || '“SITUATIE NA WIJZIGING.”' || chr(13) );
+            FOR rs IN (SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY from EMPLOYEES where EMPLOYEES.DEPARTMENT_ID = p_dep_id)
+      LOOP
+        DBMS_OUTPUT.PUT_LINE (rs.EMPLOYEE_ID || ' ' || rs.FIRST_NAME || ' ' || rs.LAST_NAME || ' ' || rs.SALARY);
+      END LOOP;
+     
+    END opgave_9;
+/

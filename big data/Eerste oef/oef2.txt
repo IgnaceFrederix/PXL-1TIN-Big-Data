@@ -1,0 +1,3 @@
+show dbs
+
+omdat er nog geen data inzit

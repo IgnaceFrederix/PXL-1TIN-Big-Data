@@ -1,0 +1,1 @@
+db.movies.find({title:/Star Wars/i}).count()

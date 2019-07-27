@@ -1,0 +1,1 @@
+db.movieDetails.find({$or:[{'imdb.votes':{$gte:50000},'imdb.rating':{$gte:8.5}},{'tomato.meter':{$gte:90}}]},{'imdb.rating':1,'imdb.votes':1,title:1,_id:0,'tomato.meter':1})

@@ -1,0 +1,1 @@
+db.boeken.insert({_id:'A002',autuer:['Wiebe van der zee', 'Bert van der zee'], boek:{titel:'Succes met big data', jaartal:2016, uitgerijk: "Van Duuren Med;ia B.V.'}})

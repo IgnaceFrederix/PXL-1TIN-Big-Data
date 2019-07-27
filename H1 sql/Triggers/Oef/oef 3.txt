@@ -1,0 +1,18 @@
+CREATE OR REPLACE TRIGGER bud_is_emp_salary
+BEFORE UPDATE OF salary OR DELETE OR INSERT
+ON employees
+DECLARE
+v_uur varchar2(8);
+BEGIN
+IF DELETING OR INSERING THEN
+IF TO_CHAR(SYSDATE,'D')=7 OR TO_CHAR(SYSDATE,'D') =1 THEN
+RAISE_APPLICATION_ERROR(-20000,'het is weekend');
+END IF;
+ELSE
+v_uur:=TO_CHAR(SYSDATE,'hh24:mi:ss');
+IF TOCHAR(SYSDATE,'d')!=2 OR v_uur <'09:00:00' OR v_uur > '17:00:00' THEN
+RAISE_APLICATION_ERROR(-20000, 'salarisaanapssing nu niet mogelijk')
+END IF;
+END IF;
+END;
+/

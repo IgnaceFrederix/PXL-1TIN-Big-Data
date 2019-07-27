@@ -1,0 +1,3 @@
+db.studentenregatta.insert({_id: '001', team: 'PXL', aantal_likes:820, teamleden: 9})
+
+omdat 001 anders als gewoon 1 genomen word

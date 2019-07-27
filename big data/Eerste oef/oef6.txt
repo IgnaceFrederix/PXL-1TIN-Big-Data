@@ -1,0 +1,1 @@
+db.studentenregatta.insert([{_id: '002', team: 'UCLL', teamleden:8}, {_id:'003', team 'Uhasselt', aantal_likes: 400}])

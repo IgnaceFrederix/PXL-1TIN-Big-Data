@@ -1,0 +1,8 @@
+SET SERVEROUTPUT ON
+DECLARE
+       v_ster VARCHAR2(50);
+BEGIN
+       asterisk_sal(100, v_ster);
+       DBMS_OUTPUT.PUT_LINE ('employee_id 100 ' ||v_ster);
+END;
+/

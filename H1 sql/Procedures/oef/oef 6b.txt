@@ -1,0 +1,3 @@
+varialbe ster varchar2<50>
+exec asterisk_sal<100, :ster>
+print ster

@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION netto
+(p_sal employees.salary%type)
+RETURN VARCHAR2
+AS
+v_netto employees.salary%type;
+BEGIN
+IF p_sal <= 10000 THEN
+	v_netto:=p_sal * 0.6;
+ELSIF p_sal <= 16000 THEN
+v_netto:= 10000 * 0.6 + (p_sal-10000) * 0.5;
+ELSE
+v_netto:= 10000 * 0.6 + 6000 * 0.5 + (p_sal-16000) *0.4;
+END IF; 
+RETURN to_char(v_netto,'9,999.00') || 'EUR';
+END;
+/

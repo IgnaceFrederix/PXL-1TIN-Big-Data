@@ -1,0 +1,1 @@
+db.studentenregatta.update({team:'Hogeschool PXL'}, {$set:{supporters:{personeel:50,studenten:150}}})

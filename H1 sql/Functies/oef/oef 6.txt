@@ -1,0 +1,10 @@
+CREATE OR REPLACE FUNCTION next_employee_id
+RETURN employees.employee_id%type
+AS
+v_number	employees.employee_id%type;
+BEGIN
+SELECT max(employee_id INTO v_number)
+FROM employees;
+RETURN v_number +1;
+END;
+/

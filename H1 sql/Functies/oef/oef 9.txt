@@ -1,0 +1,25 @@
+create or replace function get_jubileumdate
+            (p_last_name   employees.last_name%type,
+            p_first_name   employees.first_name%type)
+RETURN varchar2
+as
+  v_hire_date     date;
+  v_jubileum      date;
+BEGIN
+            select  hire_date 
+into v_hire_date 
+from employees
+            where last_name = p_last_name 
+and first_name = p_first_name;
+
+            v_jubileum := add_months(v_hire_date , 25*12);
+            if to_char(v_jubileum, 'd') != 6 then
+                        v_jubileum := next_day(v_jubileum, 'fri');
+            end if;
+            if v_jubileum < sysdate then
+                        return 'reeds gevierd';
+            else
+                        return to_char(v_jubileum);
+            end if;
+END;
+/

@@ -1,0 +1,1 @@
+db.films.update({director: 'Erik Van Looy'}, {$set:{genre: "thriller"}}, {multi:true})

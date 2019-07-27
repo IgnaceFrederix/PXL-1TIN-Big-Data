@@ -1,0 +1,1 @@
+db.films.update({naam:'Iedreen beroemd'},{$set:{acteurs:['Josse De Pauw', 'Eva van Der Gucht','Werner De Smedt']}}})

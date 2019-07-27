@@ -1,0 +1,1 @@
+db.boeken.update({auteur:'stief Larsson'},{$set:{boek:{totem:"gerechtheid',jaartal:2007}})

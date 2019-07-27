@@ -1,0 +1,6 @@
+db.movies.find({$and:[{title:{$gt:"L"}},{title:{$lt:"Q"}}]})
+of
+db.movies.find({title:{$gte:"L",$lt:"Q"}})
+
+find({key:{$gte:null}})		voor de documenten die dat bepaalde veld niet bevatten
+find({key:{$ne:null}})		om enkel de documenten te zien die dat veld net wel bevatten

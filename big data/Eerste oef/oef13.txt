@@ -1,0 +1,7 @@
+db.film.update({naam:'Loft'},$set:{acteurs:['Koen De bouw', 'Filip Peeters', 'Matthisas Schenaeerts']}})
+
+je moet de vorige waarden van de array herhalen je kna niet enkel matthisas scheonaerts zetten aangezien de andere 2 dan verdwen zijn
+
+of
+
+db.films.update({naam: "Loft"},{$push:{acteurs:"Matthias Schoenaers"}})

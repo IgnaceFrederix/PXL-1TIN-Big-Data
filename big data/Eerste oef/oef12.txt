@@ -1,0 +1,1 @@
+db.films.insert({naam:'Loft',jaar:2008,acteurs:['Koen de Bouw','Filip Peeters'],director:'Erik Van Looy'})

@@ -1,0 +1,13 @@
+	CREATE OR REPLACE PROCEDURE toon_eerste_emp
+IS
+	v_empid		employees.employee_id%TYPE;
+	v_naam		employees.last_name%TYPE;
+	v_hiredate	employees.hire_date%TYPE;
+BEGIN
+SELECT employee_id, last_name, hire_date
+INTO v_empid, v_naam, v_hiredate
+FROM employees
+WHERE hire_date=(SELECT MIN(hire_date)FROM employees);
+DBMS_OUTPUT.PUT_LINE('eerst aangeworden werknemer is' || v_empid || v_naam || '' || v_hiredate);
+END;
+/

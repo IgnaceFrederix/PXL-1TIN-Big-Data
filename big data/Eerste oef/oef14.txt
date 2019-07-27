@@ -1,0 +1,1 @@
+db.films.insert({naam:"De Premier", jaar:2016, acteurs: ["Koen de Bouw","Tine Reymer"], director: "Erik Van Looy"})

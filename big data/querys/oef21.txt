@@ -1,0 +1,1 @@
+db.movieDetails.find({'awards.text':/nominations/},{title:1,'awards.nominations':1,'awards.text':1,_id:0})

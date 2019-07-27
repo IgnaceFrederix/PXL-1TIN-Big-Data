@@ -1,0 +1,28 @@
+CREATE OR REPLACE PROCEDURE opgave_10  
+  (  p_land_id      IN    COUNTRIES.COUNTRY_ID%type )  
+ AS  
+    v_afdelingaantal number;  
+    v_landnaam      COUNTRIES.COUNTRY_NAME%type;  
+    v_locatieID     LOCATIONS.LOCATION_ID%type;
+    v_locatieIDnew     LOCATIONS.LOCATION_ID%type;
+BEGIN  
+    select COUNTRIES.COUNTRY_NAME into v_landnaam from COUNTRIES where COUNTRIES.COUNTRY_ID = p_land_id;  
+    v_locatieID := 0;
+    FOR rs IN (select distinct departments.DEPARTMENT_ID,departments.DEPARTMENT_NAME,LOCATIONS.LOCATION_ID, LOCATIONS.CITY from EMPLOYEES,departments,LOCATIONS,COUNTRIES  
+        where EMPLOYEES.DEPARTMENT_ID = departments.DEPARTMENT_ID  
+         and departments.LOCATION_ID = LOCATIONS.LOCATION_ID  
+         and LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID  
+         and COUNTRIES.COUNTRY_ID = p_land_id order by LOCATIONS.LOCATION_ID)  
+    LOOP
+        select count(EMPLOYEES.employee_id) into v_afdelingaantal from employees where DEPARTMENT_ID = rs.DEPARTMENT_ID;
+        IF v_afdelingaantal > 0 THEN
+            v_locatieIDnew := rs.LOCATION_ID;
+            IF v_locatieIDnew != v_locatieID THEN
+                DBMS_OUTPUT.PUT_LINE ('==> ' || v_landnaam || ' - ' || rs.LOCATION_ID || ' ' || rs.CITY);
+                v_locatieID := rs.LOCATION_ID; -- degene die in het begin op 0 werd gezet nu de nieuwe waarde geven; wordt bij de volgende vergeleken met wat het op dat moment is
+            END IF;
+            DBMS_OUTPUT.PUT_LINE (rs.DEPARTMENT_NAME || ': ' || v_afdelingaantal || ' werknemers');
+       END IF;
+    END LOOP;  
+END opgave_10;
+/

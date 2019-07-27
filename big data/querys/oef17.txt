@@ -1,0 +1,1 @@
+db.movies.find({$and:[{year:{$gte:2014}},{year:{lte:2017}}]},{title:1,year:1,_id:0}).sort({year:1})

@@ -1,0 +1,1 @@
+db.movieDetails.find({'tomato.meter':88}).pretty()

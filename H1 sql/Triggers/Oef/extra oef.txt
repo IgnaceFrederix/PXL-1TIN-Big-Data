@@ -1,0 +1,17 @@
+CREATE OR REPLACE TRIGGER bidr_emp
+BEFORE INSERT OR DELETE
+ON employees
+FOR EACH ROW
+BEGIN
+            IF INSERTING THEN
+                        :new.hire_date := sysdate;
+                        if to_char(sysdate,'d') in (7,1) then
+                        :new.hire_date :=next_day(sysdate,'mon');
+                        end if;
+                        :new.salary := 0;
+            ELSIF DELETING THEN
+                        DELETE FROM job_history
+                        WHERE employee_id = :old.employee_id;
+            END IF;
+END;
+/

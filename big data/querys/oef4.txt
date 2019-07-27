@@ -1,0 +1,1 @@
+db.movies.find().sort({genre:1}).skip(82).limit(15)

@@ -1,0 +1,14 @@
+CREATE OR REPLACE FUNCTION schrikkeljaar
+RETURN VARCHAR2
+AS
+V_datum date;
+BEGIN
+v_datum:=to_date('01-02-'|| to_char(sysdate,'yyyy'),'dd-mm-yyyy');
+v_datum:= last_day(v_datum);
+IF to_char(v_datum,'dd')='29' THEN
+RETURN 'het jaar' || to_char(sysdate, 'yyyy') || 'is een schrikkeljaar';
+ELSE
+RETURN 'het jaar' || to_char(sysdate, 'yyyy') || 'is geen schrikkeljaar';
+END IF;
+END;	
+/

@@ -1,0 +1,19 @@
+CREATE OR REPLACE PROCEDURE minimumloon
+	( p_land IN countries.country_name%TYPE, p_minloon IN employees.salary%type, p_aantal OUT number)
+IS
+BEGIN
+	UPDATE employees
+	SET salary = p_minloon
+WHERE department_id =
+(SELECT department_id
+	FROM departments
+	WHERE location_id=
+		(SELECT location_id
+		FROM locations
+		WHERE country_id=(SELECT country_id
+					FROM countries
+					WHERE UPPER(country_name)=UPPER(p_land))))
+AND salary < p_minloon;
+p_aantal := SQL%rowcount;
+END;
+/

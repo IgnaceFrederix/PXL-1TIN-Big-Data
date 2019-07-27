@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION schrikkeljaar
+(p_jaar dual.sysdate%type)
+RETURN VARCHAR2
+AS
+BEGIN
+IF MOD(p_jaar,4)=0 AND MOD(p_jaar,100)!=0 AND MOD(p_jaar, 400)=0  THEN
+RETURN to_char("het is een schrikkeljaar");
+ELSE
+RETURN to_char("het is geen schrikkeljaar");
+END IF;
+END;	
+/

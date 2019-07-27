@@ -1,0 +1,41 @@
+CREATE OR REPLACE TRIGGER bidr_emp
+              BEFORE INSERT OR DELETE ON employees
+              FOR EACH ROW
+DECLARE
+man departments.manager_id%TYPE;
+voornaam employees.first_Name%TYPE;
+naam employees.last_name%TYPE;
+ 
+BEGIN
+IF INSERTING THEN
+              
+              IF :NEW.manager_id IS NULL THEN
+                            SELECT manager_id
+                            INTO man
+                            FROM departments
+                            WHERE department_id = :NEW.department_id;
+ 
+                            SELECT first_name, last_name
+                            INTO voornaam, naam
+                            FROM employees
+                            WHERE employee_id = man;
+ 
+ 
+                            :NEW.manager_id := man;
+                            DBMS_OUTPUT.PUT_LINE('de chef wordt ' || voornaam || ' ' || naam);
+             END IF;
+ 
+              IF :NEW.hire_date IS NULL THEN
+                            :NEW.hire_date := NEXT_DAY(SYSDATE, 'MONDAY');
+              END IF;
+ 
+              IF :NEW.salary IS NULL THEN
+                            :NEW.salary := 1000;
+                            DBMS_OUTPUT.PUT_LINE('Het salaris van employee ' || :NEW.last_name || ' wordt 1000.');
+              END IF;
+ 
+ELSIF DELETING THEN
+              DBMS_OUTPUT.PUT_LINE('Dit is per maand een besparing van ' || :OLD.salary || ' euro.');
+END IF;
+END;
+/

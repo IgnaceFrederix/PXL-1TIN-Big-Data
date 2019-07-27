@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION bruto_jaarloon
+(p_employeeid employees.employee_id%type)
+RETURN NUMBER	
+AS
+v_jaarsal NUMBER;
+BEGIN 
+SELECT  (salary + salary*NVL(salary*commission_pct,0))*12 INTO v_jaarsal 
+FROM employees
+WHERE employee_id = p_employeeid; 
+RETURN v_jaarsal;
+END;
+/

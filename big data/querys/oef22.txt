@@ -1,0 +1,1 @@
+db.movieDetails.find({'awards.wins':0},{_id:0,title:1}).skip(19).limit(1)

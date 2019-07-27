@@ -1,0 +1,1 @@
+db.movieDetails.find({'countries.0':{$ne:'USA'}},{_id:0,title:1,countries:1}).count()

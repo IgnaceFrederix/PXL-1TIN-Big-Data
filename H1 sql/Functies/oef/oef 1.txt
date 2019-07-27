@@ -1,0 +1,6 @@
+CREATE OR REPLACE FUNCTION dagen_einde_maand
+RETURN NUMBER
+AS
+BEGIN
+RETURN last_day(sysdate) - sysdate;
+END;

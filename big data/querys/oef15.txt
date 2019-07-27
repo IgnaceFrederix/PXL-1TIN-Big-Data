@@ -1,0 +1,1 @@
+db.movieDetails.find({"actors":{$regex:/^Gary/i}},{title:1,_id:0}).sort({title:1})

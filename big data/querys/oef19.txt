@@ -1,0 +1,1 @@
+db.movies.find({'awards.wins':20}},{title:1,_id:0,'awards.nominations':1)

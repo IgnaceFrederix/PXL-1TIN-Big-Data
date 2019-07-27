@@ -1,0 +1,16 @@
+CREATE OR REPLACE PROCEDURE landenlijst_cursor
+IS
+              v_aantal_landen integer(4) := 0;
+BEGIN
+              FOR lijn IN (SELECT country_name
+                            FROM countries)
+              LOOP
+                            DBMS_OUTPUT.PUT_LINE(lijn.country_name);
+                            v_aantal_landen := v_aantal_landen + 1;
+              END LOOP;
+/*          DBMS_OUTPUT.PUT_LINE('We hebben connecties in '|| lijn%rowcount ||' landen.');
+werkt niet omdat de query geen cursor is die expliciet gedeclareerd kan worden(we kunnen er geen naam aan geven),
+daarom een counter gebruiken! */
+              DBMS_OUTPUT.PUT_LINE('We hebben connecties in '|| v_aantal_landen ||' landen.');
+END;
+/

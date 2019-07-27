@@ -1,0 +1,3 @@
+db.films.insert({naam: "iedereen beroemd", jaar:2000})
+
+db.films.find()

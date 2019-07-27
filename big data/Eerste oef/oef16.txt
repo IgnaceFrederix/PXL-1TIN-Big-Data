@@ -1,0 +1,1 @@
+db.boeken.insert({_id:'A001',auteur:'stieg Larsson',boek:[{titel:'Mannen die vrouwen haten", jaartal:2005},{titel:'Devrouw die met vuur steelde',jaartal:2006}})

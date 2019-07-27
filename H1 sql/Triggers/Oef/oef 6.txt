@@ -1,0 +1,17 @@
+CREATE OR REPLACE TRIGGER biur_emp
+              BEFORE INSERT OR UPDATE
+              ON employees
+              FOR EACH ROW
+BEGIN
+              :NEW.job_id := UPPER(:NEW.job_id);
+              :NEW.last_name := INITCAP(:NEW.last_name);
+              :NEW.first_name := INITCAP(:NEW.first_name);
+              IF INSERTING AND :NEW.hire_date < SYSDATE THEN
+                            RAISE_APPLICATION_ERROR (-20000,'Nieuwe aanwerfdatum kan niet in het verleden liggen!');
+              END IF;
+              IF :NEW.job_id IN ('%MAN', '%MGR')
+              AND :OLD.job_id NOT IN ('AD_PRES','AD_VP')
+              THEN
+              :NEW.salary := :OLD.salary * 1.05;
+              END IF;
+END biur_emp;

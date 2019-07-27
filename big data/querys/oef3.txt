@@ -1,0 +1,1 @@
+db.movies.find({},{title:1,genres:1}).sort({genre:1})

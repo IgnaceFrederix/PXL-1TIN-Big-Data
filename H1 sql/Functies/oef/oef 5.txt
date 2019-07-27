@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION vergadering
+RETURN DATE
+AS
+v_maandag	DATE;
+BEGIN
+v_maandag:=last_day(sysdate)+1;
+IF to_char(v_maandag, 'fmday')!='monday' THEN
+v_maandag:= next_day(v_maandag, 'mon');
+END IF;
+IF to_char(v_maandag, 'dd-mm') = '01-01' OR to_char(v_maandag,'dd-mm')= '01-05' THEN
+v_maandag:=v_maandag+1;
+END IF;
+RETURN v_maandag;
+END;	
+/

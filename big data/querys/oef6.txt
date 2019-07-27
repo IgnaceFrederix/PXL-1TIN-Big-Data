@@ -1,0 +1,1 @@
+db.movies.find({},{actors:1,title:1,_id:0}).sort({}).skip(100).limit(1).pretty()

@@ -1,0 +1,18 @@
+CREATE OR REPLACE TRIGGER aiud_jhis
+   AFTER INSERT OR UPDATE OR DELETE
+   ON job_history
+DECLARE 
+   v_actie VARCHAR2(15) ;
+BEGIN
+   IF INSERTING THEN
+      v_actie := 'INSERT';
+   ELSIF UPDATING THEN
+      v_actie := 'UPDATE';
+   ELSE
+      v_actie := 'DELETE';
+   END IF;
+
+   INSERT INTO log_history
+         VALUES(USER, SYSDATE, SYSTIMESTAMP, v_actie);      
+END;
+/

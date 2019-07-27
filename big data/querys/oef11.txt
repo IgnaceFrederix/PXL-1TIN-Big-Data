@@ -1,0 +1,1 @@
+db.movieDetail.find({rated:"UNRATED"}).count()

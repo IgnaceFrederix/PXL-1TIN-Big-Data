@@ -1,0 +1,16 @@
+CREATE OR REPLACE PROCEDURE asterisk_sal
+(p_empid IN employees.employee_id%TYPE)
+IS
+	v_sal	employees.salary%TYPE;
+	v_asterrisk VARCHAR2(50);
+BEGIN
+	SELECT salary
+	INTO v_sal
+	FROM employees
+	WHERE employee_id=p_empid;
+	FOR i IN 1..ROUND(v_sal/1000)LOOP
+			v_asterrisk:=v_asterrisk||'*';
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('employee_id'||p_empid||':'||v_asterrisk);
+END asterisk_sal;
+/
